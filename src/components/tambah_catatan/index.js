@@ -3,10 +3,11 @@ import {
   Text,
   TextInput,
   ScrollView,
+  BackHandler,
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {user} from '../../routers';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -25,6 +26,27 @@ const Tambah_Catatan = ({navigation}) => {
       Tambah_Catatan();
     }
   };
+
+  useEffect(() => {
+    const backAction = () => {
+      Alert.alert('Bentar', 'Kamu Yakin Ingin Keluar App ?', [
+        {
+          text: 'Batal',
+          onPress: () => null,
+          style: 'cancel',
+        },
+        {
+          text: 'Iya',
+          onPress: () => BackHandler.exitApp(),
+        },
+      ]);
+      return true;
+    };
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+  }, []);
 
   //nyimpan data//
   const saveData = async data => {

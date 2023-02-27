@@ -5,6 +5,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Alert,
+  BackHandler,
 } from 'react-native';
 import React, {createContext, useContext, useEffect, useState} from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -23,6 +24,25 @@ const Edit = ({navigation, route}) => {
     setJudulInputModal(route.params.Judul);
     setCatatanNomorModal(route.params.catatan);
     setIndex(route.params.index);
+
+    const backAction = () => {
+      Alert.alert('Bentar', 'Kamu Yakin Ingin Keluar App ?', [
+        {
+          text: 'Batal',
+          onPress: () => null,
+          style: 'cancel',
+        },
+        {
+          text: 'Iya',
+          onPress: () => BackHandler.exitApp(),
+        },
+      ]);
+      return true;
+    };
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
   }, []);
 
   //ubah data//
