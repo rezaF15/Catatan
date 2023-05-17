@@ -117,6 +117,7 @@ const HomeScreen = ({navigation}) => {
           Report App
         </Text>
       </TouchableOpacity>
+
       <View
         style={{
           borderWidth: 2,
@@ -187,7 +188,7 @@ const HomeScreen = ({navigation}) => {
               CATATAN
             </Text>
           </View>
-          {data.map((item, index) => {
+          {data.reverse().map((item, index) => {
             return (
               <View
                 key={index}
